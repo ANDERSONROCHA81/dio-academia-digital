@@ -5,8 +5,8 @@ import me.dio.academia.digital.entity.AvaliacaoFisica;
 import me.dio.academia.digital.entity.form.AlunoForm;
 import me.dio.academia.digital.entity.form.AlunoUpdateForm;
 
-import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 public interface IAlunoService {
   /**
@@ -21,7 +21,7 @@ public interface IAlunoService {
    * @param id id do Aluno que será exibido.
    * @return Aluno de acordo com o Id fornecido.
    */
-  Aluno get(Long id);
+  Optional<Aluno> getAlunoById(Long id);
 
   /**
    * Retorna os Alunos que estão no banco de dados.
