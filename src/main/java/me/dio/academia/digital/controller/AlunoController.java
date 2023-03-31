@@ -3,7 +3,9 @@ package me.dio.academia.digital.controller;
 import me.dio.academia.digital.entity.Aluno;
 import me.dio.academia.digital.entity.AvaliacaoFisica;
 import me.dio.academia.digital.entity.form.AlunoForm;
+import me.dio.academia.digital.entity.form.AlunoUpdateForm;
 import me.dio.academia.digital.service.impl.AlunoServiceImpl;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,6 +35,20 @@ public class AlunoController {
     }else {
       return ResponseEntity.status(HttpStatus.OK).body(alunoOptional.get());
     }
+  }
+
+  @PutMapping("/{id}")
+  public ResponseEntity<Object> updateAluno(@PathVariable Long id,
+                                            @Valid @RequestBody AlunoUpdateForm formUpdate){
+    Optional<Aluno> alunoOptional = service.getAlunoById(id);
+    if (!alunoOptional.isPresent()){
+      return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Aluno não encontrado.");
+    }
+    Aluno aluno = new Aluno();
+    BeanUtils.copyProperties(formUpdate, aluno);
+    aluno.setId(alunoOptional.get().getId());
+    aluno.setCpf(alunoOptional.get().getCpf());
+    return ResponseEntity.status(HttpStatus.OK).body(service.create(aluno));
   }
 
   @GetMapping("/avaliacoes/{id}")

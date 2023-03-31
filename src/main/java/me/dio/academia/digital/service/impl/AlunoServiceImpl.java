@@ -32,6 +32,11 @@ public class AlunoServiceImpl implements IAlunoService {
   }
 
   @Override
+  public Aluno create(Aluno aluno) {
+    return repository.save(aluno);
+  }
+
+  @Override
   public Optional<Aluno> getAlunoById(Long id) {
     return repository.findById(id);
   }
@@ -49,8 +54,8 @@ public class AlunoServiceImpl implements IAlunoService {
   }
 
   @Override
-  public Aluno update(Long id, AlunoUpdateForm formUpdate) {
-    return null;
+  public Optional<Aluno> updateAluno(Long id, AlunoUpdateForm formUpdate) {
+    return repository.findById(id);
   }
 
   @Override

@@ -15,6 +15,7 @@ public interface IAlunoService {
    * @return Aluno recém-criado.
    */
   Aluno create(AlunoForm form);
+  Aluno create(Aluno aluno);
 
   /**
    * Retorna um Aluno que está no banco de dados de acordo com seu Id.
@@ -36,7 +37,7 @@ public interface IAlunoService {
    * no banco de dados.
    * @return Aluno recém-atualizado.
    */
-  Aluno update(Long id, AlunoUpdateForm formUpdate);
+  Optional<Aluno> updateAluno(Long id, AlunoUpdateForm formUpdate);
 
   /**
    * Deleta um Aluno específico.
