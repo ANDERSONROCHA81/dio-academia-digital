@@ -61,4 +61,14 @@ public class AlunoController {
                                   String dataDeNacimento){
     return service.getAll(dataDeNacimento);
   }
+
+  @DeleteMapping("/{id}")
+  public ResponseEntity<Object> deleteAluno(@PathVariable Long id){
+    Optional<Aluno> alunoOptional = service.getAlunoById(id);
+    if (alunoOptional.isEmpty()){
+      return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Aluno não encontrado.");
+    }
+    service.deleteAluno(alunoOptional.get().getId());
+    return ResponseEntity.status(HttpStatus.OK).body("Aluno deletado com sucesso.");
+  }
 }

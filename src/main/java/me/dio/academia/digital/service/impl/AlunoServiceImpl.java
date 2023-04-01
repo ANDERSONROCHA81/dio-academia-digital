@@ -1,5 +1,6 @@
 package me.dio.academia.digital.service.impl;
 
+import jakarta.transaction.Transactional;
 import me.dio.academia.digital.entity.Aluno;
 import me.dio.academia.digital.entity.AvaliacaoFisica;
 import me.dio.academia.digital.entity.form.AlunoForm;
@@ -59,7 +60,9 @@ public class AlunoServiceImpl implements IAlunoService {
   }
 
   @Override
-  public void delete(Long id) {
+  @Transactional
+  public void deleteAluno(Long id) {
+    repository.deleteById(id);
   }
 
   @Override
