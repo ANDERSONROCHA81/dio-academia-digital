@@ -1,5 +1,6 @@
 package me.dio.academia.digital.service.impl;
 
+import jakarta.transaction.Transactional;
 import me.dio.academia.digital.entity.Aluno;
 import me.dio.academia.digital.entity.AvaliacaoFisica;
 import me.dio.academia.digital.entity.form.AvaliacaoFisicaForm;
@@ -56,7 +57,8 @@ public class AvaliacaoFisicaServiceImpl implements IAvaliacaoFisicaService {
   }
 
   @Override
-  public void delete(Long id) {
-
+  @Transactional
+  public void deleteavaliacaoFisica(Long id) {
+    avaliacaoFisicaRepository.deleteById(id);
   }
 }

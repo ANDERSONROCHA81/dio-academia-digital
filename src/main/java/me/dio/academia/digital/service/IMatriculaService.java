@@ -4,6 +4,7 @@ import me.dio.academia.digital.entity.Matricula;
 import me.dio.academia.digital.entity.form.MatriculaForm;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface IMatriculaService {
   /**
@@ -15,10 +16,11 @@ public interface IMatriculaService {
 
   /**
    * Retorna uma Matrícula que está no banco de dados de acordo com seu Id.
+   *
    * @param id - id da Matrícula que será exibida.
    * @return - Matrícula de acordo com o Id fornecido.
    */
-  Matricula get(Long id);
+  Optional<Matricula> getMatriculaById(Long id);
 
   /**
    * Retorna todas as Matrículas que estão no banco de dados.

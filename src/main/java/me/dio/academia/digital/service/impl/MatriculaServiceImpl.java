@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MatriculaServiceImpl implements IMatriculaService {
@@ -22,17 +23,15 @@ public class MatriculaServiceImpl implements IMatriculaService {
 
   @Override
   public Matricula create(MatriculaForm form) {
-    Matricula matricula = new Matricula();
     Aluno aluno = alunoRepository.findById(form.getAlunoId()).get();
-
+    Matricula matricula = new Matricula();
     matricula.setAluno(aluno);
-
     return matriculaRepository.save(matricula);
   }
 
   @Override
-  public Matricula get(Long id) {
-    return matriculaRepository.findById(id).get();
+  public Optional<Matricula> getMatriculaById(Long id) {
+    return matriculaRepository.findById(id);
   }
 
   @Override
