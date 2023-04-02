@@ -14,6 +14,7 @@ public interface IAvaliacaoFisicaService {
    * @return - Avaliação Física recém-criada.
    */
   AvaliacaoFisica create(AvaliacaoFisicaForm form);
+  AvaliacaoFisica create(AvaliacaoFisica avaliacaoFisica);
 
   /**
    * Retorna uma Avaliação Física que está no banco de dados de acordo com seu Id.
@@ -30,12 +31,13 @@ public interface IAvaliacaoFisicaService {
 
   /**
    * Atualiza a avaliação física.
-   * @param id - id da Avaliação Física que será atualizada.
+   *
+   * @param id         - id da Avaliação Física que será atualizada.
    * @param formUpdate - formulário referente aos dados necessários para atualização da Avaliação
-   * Física no banco de dados.
+   *                   Física no banco de dados.
    * @return - Avaliação Física recém-atualizada.
    */
-  AvaliacaoFisica update(Long id, AvaliacaoFisicaUpdateForm formUpdate);
+  Optional<AvaliacaoFisica> updateAvaliacaoFisica(Long id, AvaliacaoFisicaUpdateForm formUpdate);
 
   /**
    * Deleta uma Avaliação Física específica.
