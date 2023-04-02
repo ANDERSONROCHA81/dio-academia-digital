@@ -46,8 +46,7 @@ public class MatriculaServiceImpl implements IMatriculaService {
   }
 
   @Override
-  public void delete(Long id) {}
-
-
-
+  public void deleteMatricula(Long id) {
+    matriculaRepository.deleteById(id);
+  }
 }

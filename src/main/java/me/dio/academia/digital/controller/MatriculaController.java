@@ -3,6 +3,7 @@ package me.dio.academia.digital.controller;
 import jakarta.validation.Valid;
 import me.dio.academia.digital.entity.Matricula;
 import me.dio.academia.digital.entity.form.MatriculaForm;
+import me.dio.academia.digital.service.impl.AlunoServiceImpl;
 import me.dio.academia.digital.service.impl.MatriculaServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,6 +19,8 @@ public class MatriculaController {
 
   @Autowired
   private MatriculaServiceImpl service;
+  @Autowired
+  private AlunoServiceImpl serviceAluno;
 
   @PostMapping
   public Matricula create(@Valid @RequestBody MatriculaForm form) {
@@ -39,5 +42,13 @@ public class MatriculaController {
     }
   }
 
+  @DeleteMapping("/{id}")
+  public ResponseEntity<Object> deleteMatricula(@PathVariable Long id){
+    Optional<Matricula> matriculaOptional = service.getMatriculaById(id);
+    if (matriculaOptional.isEmpty()){
+      return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Matrícula não encontrada.");
+    }
+    service.deleteMatricula(matriculaOptional.get().getId());
+    return ResponseEntity.status(HttpStatus.OK).body("Matrícula deletada com sucesso.");
+  }
 }
-
