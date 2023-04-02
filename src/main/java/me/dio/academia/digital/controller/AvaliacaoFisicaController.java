@@ -1,12 +1,16 @@
 package me.dio.academia.digital.controller;
 
+import jakarta.validation.Valid;
 import me.dio.academia.digital.entity.AvaliacaoFisica;
 import me.dio.academia.digital.entity.form.AvaliacaoFisicaForm;
 import me.dio.academia.digital.service.impl.AvaliacaoFisicaServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/avaliacoes")
@@ -16,13 +20,23 @@ public class AvaliacaoFisicaController {
   private AvaliacaoFisicaServiceImpl service;
 
   @PostMapping
-  public AvaliacaoFisica create(@RequestBody AvaliacaoFisicaForm form) {
+  public AvaliacaoFisica create(@Valid @RequestBody AvaliacaoFisicaForm form) {
     return service.create(form);
   }
 
   @GetMapping
   public List<AvaliacaoFisica> getAll(){
     return service.getAll();
+  }
+
+  @GetMapping("/{id}")
+  public ResponseEntity<Object> getAvaliacaoFisicaById(@PathVariable Long id){
+    Optional<AvaliacaoFisica> avaliacaoFisicaOptional = service.getAvaliacaoFisicaById(id);
+    if (!avaliacaoFisicaOptional.isPresent()){
+      return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Avaliação física não encontrada.");
+    }else {
+      return ResponseEntity.status(HttpStatus.OK).body(avaliacaoFisicaOptional.get());
+    }
   }
 
 }

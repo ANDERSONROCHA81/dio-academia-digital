@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AvaliacaoFisicaServiceImpl implements IAvaliacaoFisicaService {
@@ -34,8 +35,8 @@ public class AvaliacaoFisicaServiceImpl implements IAvaliacaoFisicaService {
   }
 
   @Override
-  public AvaliacaoFisica get(Long id) {
-    return null;
+  public Optional<AvaliacaoFisica> getAvaliacaoFisicaById(Long id) {
+    return avaliacaoFisicaRepository.findById(id);
   }
 
   @Override
